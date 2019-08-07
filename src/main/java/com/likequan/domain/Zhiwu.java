@@ -19,6 +19,7 @@ package com.likequan.domain;
  */
 public class Zhiwu {
 
+	private Integer iid;
 	private Integer id;
 	private String name;//植物名
 	private String miao;//植物描述
