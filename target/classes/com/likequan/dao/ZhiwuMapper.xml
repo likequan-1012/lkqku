@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.likequan.dao.ZhiwuMapper">
+<!-- 页面展示 -->
+<select id="selects" resultType="com.likequan.domain.Zhiwu">
+SELECT a.*,b.tname FROM zhiwu a LEFT JOIN ztype b ON a.tid =b.tid
+<where>
+<if test="z.name!=null and z.name!='' ">
+and name like '%${z.name}%'
+</if>
+</where>
+limit ${startPage},${pageSize}
+</select>
+
+<select id="count" resultType="int">
+SELECT COUNT(*) FROM zhiwu a LEFT JOIN ztype b ON a.tid =b.tid
+<where>
+<if test="z.name!=null and z.name!='' ">
+and name like '%${z.name}%'
+</if>
+</where>
+</select>
+
+<!-- 查看 -->
+<select id="selectById" resultType="com.likequan.domain.Zhiwu">
+SELECT * FROM zhiwu a LEFT JOIN ztype b ON a.tid =b.tid WHERE a.id=#{id}
+</select>
+
+<select id="selectType" resultType="com.likequan.domain.Zhiwu">
+select * from ztype
+</select>
+<!-- 添加 -->
+<insert id="insert">
+insert into zhiwu set name=#{name},miao=#{miao},tid=#{tid}
+</insert>
+
+<!-- 修改 -->
+<insert id="update">
+update zhiwu set name=#{name},miao=#{miao},tid=#{tid} where id=#{id}
+</insert>
+
+<!-- 删除 -->
+<delete id="dels">
+delete  from zhiwu where id in (${value})
+</delete>
+</mapper>
+
+  
